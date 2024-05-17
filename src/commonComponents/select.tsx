@@ -24,6 +24,7 @@ const MuiSelect = (props: iSelectComponentProps) => (
       name={props.name}
       disabled={props?.disabled}
     >
+      <MenuItem value=""><em>None</em></MenuItem>
       {props?.data?.map((item: any) => <MenuItem key={item} value={item}>{item}</MenuItem>)}
     </Select>
     {props.helperText && <FormHelperText>{props.helperText}</FormHelperText>}

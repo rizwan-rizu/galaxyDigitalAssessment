@@ -1,4 +1,4 @@
-import TradeForm from './components/traderFrom/traderForm';
+import TradeForm from './components/traderFrom';
 
 const App = () => {
   return (

@@ -4,12 +4,12 @@ export const initialFormState: iOptionTrade = {
   instrument: "",
   expirationDate: "",
   type: "",
-  strikePrice: 0,
-  price: 0,
-  quantity: 0,
+  strikePrice: '',
+  price: '',
+  quantity: '',
   tokenName: '',
-  minNotional: 0,
-  maxNotional: 0
+  minNotional: '',
+  maxNotional: ''
 }
 
 

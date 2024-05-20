@@ -12,3 +12,16 @@ export interface iOptionTrade extends iSpotTrade {
   type: 'put' | 'call' | "";
   strikePrice: number | "";
 }
+
+export interface iFormFields {
+  type: string
+  label: string
+  variant: "outlined" | "filled" | "standard"
+  name: string
+  placeholder?: string
+  size?: "medium" | "small"
+  fullWidth?: boolean
+  required?: boolean
+  data?: any[]
+  isVisible?: boolean
+}

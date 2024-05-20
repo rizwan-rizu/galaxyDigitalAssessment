@@ -2,7 +2,8 @@ import { FC, FormEvent, useReducer, useState } from 'react';
 import { Box, Stack, Alert } from '@mui/material';
 import { Text } from '../../commonComponents/commonStyledComponents';
 import { initialFormState, reducer } from './reducer';
-import { formFields, iformFields } from './formJson';
+import { formFields } from './formJson';
+import { iFormFields } from './interface';
 import { optionsPrices, spotPrices } from './sampleData';
 import MuiSelect from '../../commonComponents/select';
 import MuiTextfield from '../../commonComponents/textInput';
@@ -111,7 +112,6 @@ const TradeForm: FC = () => {
     // Check if the option price is within a reasonable range (±10%) of the option's last price
     if (formValue.instrument === 'Option' && optionLastPrice) {
       const isOptionPriceWithinReasonableRange = formValue.price <= optionLastPrice * 1.1 && formValue.price >= optionLastPrice * 0.9;
-      console.log(isOptionPriceWithinReasonableRange, optionLastPrice * 1.1, optionLastPrice * 0.9)
       if (!isOptionPriceWithinReasonableRange) return setShowFeedback({ open: true, message: "Price is not within a reasonable range (±10%) of the option's last price." });
     }
 
@@ -125,7 +125,7 @@ const TradeForm: FC = () => {
         <Text sx={{ textAlign: "center" }} variant="h6">Over-The-Counter Trader Form</Text>
         <form onSubmit={(e) => handleSubmit(e)}>
           <Stack mt={2} direction="column" spacing={1.5}>
-            {formJson.map((item: iformFields) => (
+            {formJson.map((item: iFormFields) => (
               <>
                 {["text", "number", "date"].includes(item.type) && item.isVisible &&
                   <MuiTextfield

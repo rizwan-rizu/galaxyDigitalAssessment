@@ -1,17 +1,6 @@
-export interface iformFields {
-  type: string
-  label: string
-  variant: "outlined" | "filled" | "standard"
-  name: string
-  placeholder?: string
-  size?: "medium" | "small"
-  fullWidth?: boolean
-  required?: boolean
-  data?: any[]
-  isVisible?: boolean
-}
+import { iFormFields } from "./interface";
 
-export const formFields = (state: any): iformFields[] => ([
+export const formFields = (state: any): iFormFields[] => ([
   { variant: "outlined", type: "select", label: "Instrument", name: "instrument", data: ["Option", "Spot"], size: "medium", fullWidth: true, required: true, isVisible: true },
   { variant: "outlined", type: "date", label: "Expiration Date", name: "expirationDate", size: "medium", fullWidth: true, required: true, isVisible: state.instrument === "Option" },
   { variant: "outlined", type: "select", label: "Type", name: "type", data: ["Call", "Put"], size: "medium", fullWidth: true, required: true, isVisible: state.instrument === "Option" },

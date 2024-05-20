@@ -16,7 +16,16 @@ export const initialFormState: iOptionTrade = {
 export const reducer = (state: any, action: any) => {
   switch (action.type) {
     case "instrument":
-      return { ...state, instrument: action.data }
+      return {
+        ...state,
+        instrument: action.data,
+        expirationDate: "",
+        type: "",
+        strikePrice: '',
+        price: '',
+        quantity: '',
+        tokenName: '',
+      }
     case "expirationDate":
       return { ...state, expirationDate: action.data }
     case "type":

@@ -61,5 +61,25 @@ export const optionsPrices = [
     "tradeCount": 0,
     "strikePrice": "57000",
     "exercisePrice": "66852.53595745"
+  },
+  {
+    "symbol": "BNB-240524-635-C",
+    "priceChange": "-0.3",
+    "priceChangePercent": "-0.2727",
+    "lastPrice": "0.8",
+    "lastQty": "0",
+    "open": "1.1",
+    "high": "1.7",
+    "low": "0.8",
+    "volume": "106.01",
+    "amount": "176.19",
+    "bidPrice": "0",
+    "askPrice": "1",
+    "openTime": 1716080347227,
+    "closeTime": 1716131827998,
+    "firstTradeId": 15,
+    "tradeCount": 12,
+    "strikePrice": "635",
+    "exercisePrice": "573.60034001"
   }
 ]

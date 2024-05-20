@@ -20,35 +20,37 @@ const TradeForm: FC = () => {
   const formJson = formFields(formValue)
 
   const checkTradeConsistency = (option: { [key: string]: string }, spotPrice: string) => {
-    const lastPrice = parseFloat(option?.lastPrice);
-    const open = parseFloat(option?.open);
-    const high = parseFloat(option?.high);
-    const low = parseFloat(option?.low);
-    const bidPrice = parseFloat(option?.bidPrice);
-    const askPrice = parseFloat(option?.askPrice);
-    const priceChange = parseFloat(option?.priceChange);
-    const priceChangePercent = parseFloat(option?.priceChangePercent);
-    const volume = parseFloat(option?.volume);
-    const amount = parseFloat(option?.amount);
-    const tradeCount = parseInt(option?.tradeCount, 10);
-    const spotPriceValue = parseFloat(spotPrice);
-    const tokenName = option?.symbol;
-    const currentDate = new Date();
+    const plusTenPercent: number = 1.1;
+    const minusTenPercent: number = 0.9;
+    const lastPrice: number = parseFloat(option?.lastPrice);
+    const open: number = parseFloat(option?.open);
+    const high: number = parseFloat(option?.high);
+    const low: number = parseFloat(option?.low);
+    const bidPrice: number = parseFloat(option?.bidPrice);
+    const askPrice: number = parseFloat(option?.askPrice);
+    const priceChange: number = parseFloat(option?.priceChange);
+    const priceChangePercent: number = parseFloat(option?.priceChangePercent);
+    const volume: number = parseFloat(option?.volume);
+    const amount: number = parseFloat(option?.amount);
+    const tradeCount: number = parseInt(option?.tradeCount, 10);
+    const spotPriceValue: number = parseFloat(spotPrice);
+    const tokenName: string = option?.symbol;
+    const currentDate: Date = new Date();
 
     let message = [];
 
     // Check if the price is within a reasonable range (±10%) of the current spot price
     if (formValue.instrument === 'Spot' && spotPriceValue) {
-      const isPriceWithinReasonableRange = formValue.price <= spotPriceValue * 1.1 && formValue.price >= spotPriceValue * 0.9;
-      if (!isPriceWithinReasonableRange) message.push(`Price (${formValue.price}) is not within a reasonable range (${spotPriceValue * 0.9} - ${parseFloat((spotPriceValue * 1.1).toString())}) of the current spot price.`);
+      const isPriceWithinReasonableRange = formValue.price <= spotPriceValue * plusTenPercent && formValue.price >= spotPriceValue * minusTenPercent;
+      if (!isPriceWithinReasonableRange) message.push(`Price (${formValue.price}) is not within a reasonable range (${spotPriceValue * minusTenPercent} — ${parseFloat((spotPriceValue * plusTenPercent).toString())}) of the current spot price.`);
     }
 
     if (formValue.instrument === "Option") {
 
       // Check if the option price is within a reasonable range (±10%) of the option's last price
       if (lastPrice) {
-        const isOptionPriceWithinReasonableRange = formValue.price <= lastPrice * 1.1 && formValue.price >= lastPrice * 0.9;
-        if (!isOptionPriceWithinReasonableRange) message.push(`Price (${formValue.price}) is not within a reasonable range (${lastPrice * 0.9} - ${lastPrice * 1.1}) of the option's last price.`);
+        const isOptionPriceWithinReasonableRange = formValue.price <= lastPrice * plusTenPercent && formValue.price >= lastPrice * minusTenPercent;
+        if (!isOptionPriceWithinReasonableRange) message.push(`Price (${formValue.price}) is not within a reasonable range (${lastPrice * minusTenPercent} — ${lastPrice * plusTenPercent}) of the option's last price.`);
       }
 
       // The lastPrice should lie between the low and high prices to ensure it is within the recorded daily price range.
@@ -119,7 +121,7 @@ const TradeForm: FC = () => {
       return setShowFeedback({ open: true, message: "Failed to find binance data against token name." });
     }
 
-    // All validations passed
+    // checkTradeConsistency method will return the messages
     return setShowFeedback({ open: true, message: checkTradeConsistency(optionPriceData as any, spotPriceData?.price as any) });
   }
 

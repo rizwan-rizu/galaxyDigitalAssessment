@@ -116,5 +116,6 @@ if (formValue.minNotional && formValue.maxNotional && formValue.quantity) {
 3. `Dynamic Reasonable Range`: Instead of hardcoding the reasonable range (±10%), we can consider making it configurable based on market conditions or user input.
 4. `Handling Edge Cases`: Add checks to handle zero or negative values gracefully. Ensure that calculations handle precision and rounding correctly, especially for financial data which might require high precision.
 5. `Input Validation`: Ensure all inputs are validated and sanitized to prevent security vulnerabilities such as injection attacks.
+6. `User Interface Enhancements`: Improve the UI to better display form & validation results. Add loading indicators and error handling for better user experience.
 
 ### Note: Refer to the sampleData.tsx file and use that for validation.

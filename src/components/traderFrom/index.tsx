@@ -20,17 +20,17 @@ const TradeForm: FC = () => {
   const formJson = formFields(formValue)
 
   const checkTradeConsistency = (option: { [key: string]: string }) => {
-    const lastPrice = parseFloat(option.lastPrice);
-    const open = parseFloat(option.open);
-    const high = parseFloat(option.high);
-    const low = parseFloat(option.low);
-    const bidPrice = parseFloat(option.bidPrice);
-    const askPrice = parseFloat(option.askPrice);
-    const priceChange = parseFloat(option.priceChange);
-    const priceChangePercent = parseFloat(option.priceChangePercent);
-    const volume = parseFloat(option.volume);
-    const amount = parseFloat(option.amount);
-    const tradeCount = parseInt(option.tradeCount, 10);
+    const lastPrice = parseFloat(option?.lastPrice);
+    const open = parseFloat(option?.open);
+    const high = parseFloat(option?.high);
+    const low = parseFloat(option?.low);
+    const bidPrice = parseFloat(option?.bidPrice);
+    const askPrice = parseFloat(option?.askPrice);
+    const priceChange = parseFloat(option?.priceChange);
+    const priceChangePercent = parseFloat(option?.priceChangePercent);
+    const volume = parseFloat(option?.volume);
+    const amount = parseFloat(option?.amount);
+    const tradeCount = parseInt(option?.tradeCount, 10);
     const currentDate = new Date();
 
     let message = [];

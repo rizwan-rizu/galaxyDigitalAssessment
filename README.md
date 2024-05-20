@@ -111,7 +111,7 @@ if (formValue.minNotional && formValue.maxNotional && formValue.quantity) {
 - Reason: Prevents trades that are too small, which might not be economically viable or efficient for execution.Also Prevents trades that are too large, which could pose a significant risk or impact the market.
 
 ## Potential Improvements
-1. `Date Format Validation`: Implement a check to validate the format of the expiration date to ensure it conforms to expected standards. epoch
+1. `Date Format Validation`: Implement a check to validate the format of the expiration date to ensure it conforms to expected standards. Epoch can be used to work with datetime.
 2. `Improved Error Message`: Enhance the error messages to provide more context or suggestions for correction.
 3. `Dynamic Reasonable Range`: Instead of hardcoding the reasonable range (±10%), we can consider making it configurable based on market conditions or user input.
 4. `Handling Edge Cases`: Add checks to handle zero or negative values gracefully. Ensure that calculations handle precision and rounding correctly, especially for financial data which might require high precision.
@@ -123,13 +123,13 @@ if (formValue.minNotional && formValue.maxNotional && formValue.quantity) {
 
 
 #### valid spot trade detail
-![alt text](image.png)
+![alt text](/src/assets/pic/image.png)
 
 #### Invalid spot trade detail
-![alt text](image-1.png)
+![alt text](/src/assets/pic/image-1.png)
 
 #### Invalid option trade detail
-![alt text](image-2.png)
+![alt text](/src/assets/pic/image-2.png)
 
 #### valid option trade detail
-![alt text](image-3.png)
+![alt text](/src/assets/pic/image-3.png)

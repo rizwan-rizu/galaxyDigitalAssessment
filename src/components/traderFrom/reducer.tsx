@@ -12,7 +12,6 @@ export const initialFormState: iOptionTrade = {
   maxNotional: ''
 }
 
-
 export const reducer = (state: any, action: any) => {
   switch (action.type) {
     case "instrument":

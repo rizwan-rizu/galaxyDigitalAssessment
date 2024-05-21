@@ -1,3 +1,19 @@
+# Table of Contents
+
+- [Getting Started with the Application](#getting-started-with-the-application)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Set up & Installation](#set-up--installation)
+- [Component Structure:](#component-structure)
+- [Check if the base price or strike price entered is within a reasonable range](#check-if-the-base-price-or-strike-price-entered-is-within-a-reasonable-range)
+- [Check for consistency in the trade details](#check-for-consistency-in-the-trade-details)
+- [Potential Improvements](#potential-improvements)
+- [Note: Refer to the sampleData.tsx file and use that for validation.](#note-refer-to-the-sampledatatsx-file-and-use-that-for-validation)
+  - [valid spot trade detail](#valid-spot-trade-detail)
+  - [Invalid spot trade detail](#invalid-spot-trade-detail)
+  - [Invalid option trade detail](#invalid-option-trade-detail)
+  - [valid option trade detail](#valid-option-trade-detail)
+
 # Getting Started with the Application
 This document provides an overview of the solution implemented, potential improvements we can do, and guidelines on how to set it up locally and run it.
 
@@ -11,13 +27,13 @@ Before you begin, ensure you have the following installed in your computer:
 
 Installing Node.js automatically includes NPM.
 
-## Set up & Installation
+### Set up & Installation
 - Clone the repository to setup project locally: `git clone https://github.com/rizwan-rizu/galaxyDigitalAssessment.git`
 - Navigate to the project folder: `cd galaxyDigitalAssessment`
 - Install dependencies: `npm install`
 - Run the the appliation locally: `npm start`
 
-## Component Structure:
+# Component Structure
 
 Two folders were created in the `Src` folder. One is `commonComponents`, which includes all of the common components that can be used throughout the application for reusable purposes. It contains wrappers for the following.
 
@@ -29,15 +45,16 @@ Two folders were created in the `Src` folder. One is `commonComponents`, which i
 The other folder is `components` and in that we have the `traderForm` component which includes different files like
 
 - `interface.tsx`: In this file I have includes all the typescript interfaces for the component.
-- `formJson.tsx`: This file exports the trader form's JSON and uses it to dynamically display a user input form. Implementing it this way provides great reusability, as seen in the `index.tsx` file, where I have mapped the JSON and dynamically displayed form based on the item.
+- `formJson.tsx`: This file exports the trader form's JSON and uses it to dynamically display a user input form. Implementing it this way provides great reusability, as seen in the `index.tsx` file, where I have mapped the JSON and dynamically displayed form based on the item. The form's JSON can also be retrieved from the backend and dynamically displayed on the frontend, which is an additional advantage of implementing it this way.
 - `reducer.tsx`: This file contains and exports both the form's initial state and the reducer, which manages input changes and updates the state as needed. For reusability and more control over state management, I prefer to use the `useReducer()` hook instead of `useState()`. 
 - `sampleData.tsx`: This file contains the binance sample data for the spot and option trade.
 - `index.tsx`: This file contains the trader form component, which is called in 'app.tsx'.
+- `utility.tsx`: The `checkTradeConsistency()` method, which contains conditions to check for trade consistency, is exported by this file. Having this separate file makes it easier to read; otherwise, I would have to add it to the index.tsx file, which would have increased its size and line count.
 
-## Check if the base price or strike price entered is within a reasonable range
+# Check if the base price or strike price entered is within a reasonable range
 The criteria to check if the base price or strike price is within a reasonable range. I am ensuring the user-entered base price is within `±10%` of the current spot price and last option price from Binance. A reasonable range (±10%) is not a strict industry standard but rather a commonly used heuristic in financial applications to ensure that user-entered prices are within a realistic range based on current market data. This range helps prevent significant deviations from market prices, which can indicate errors in data entry or unrealistic trades.
 
-## Check for consistency in the trade details
+# Check for consistency in the trade details
 To check trade consistency I have applied following checks.
 
 1. Last Price Consistency Check:
@@ -109,6 +126,13 @@ if (formValue.minNotional && formValue.maxNotional && formValue.quantity) {
 ```
 - purpose: Ensures that the size of the transaction (notional value) is within acceptable bounds.
 - Reason: Prevents trades that are too small, which might not be economically viable or efficient for execution.Also Prevents trades that are too large, which could pose a significant risk or impact the market.
+9. Type consistency check:
+```
+if (tokenName.charAt(tokenName.length - 1) !== formValue.type.charAt(0)) {
+      message.push(`Given option type (${formValue.type}) is not consistent with the trade option type (${tokenName.charAt(tokenName.length - 1) === "C" ? "Call" : "Put"}).`);
+    }
+```
+- purpose: Ensures that the option type matches with the trade type.
 
 ## Potential Improvements
 1. `Date Format Validation`: Implement a check to validate the format of the expiration date to ensure it conforms to expected standards. Epoch can be used to work with datetime.
@@ -117,19 +141,7 @@ if (formValue.minNotional && formValue.maxNotional && formValue.quantity) {
 4. `Handling Edge Cases`: Add checks to handle zero or negative values gracefully. Ensure that calculations handle precision and rounding correctly, especially for financial data which might require high precision.
 5. `Input Validation`: Ensure all inputs are validated and sanitized to prevent security vulnerabilities such as injection attacks.
 6. `User Interface Enhancements`: Improve the UI to better display form & validation results. Add loading indicators and error handling for better user experience.
-7. `Setting Notional Value Limits for Readability`: We can establish upper and lower limits on the notional value for instance, ensuring it remains within a specific number of digits. This prevents the value from becoming excessively large and difficult to read.
+7. `Setting Notional Value Limits for Readability`: Set a limits on the notional value for instance, ensuring it remains within a specific number of digits. This prevents the value from becoming excessively large and difficult to read.
+8. `Setting limit after decmimal point`: Set a limit on the number of digits that can follow a decimal point in values for better readability.
 
-### Note: Refer to the sampleData.tsx file and use that for validation.
-
-
-#### valid spot trade detail
-![alt text](/src/assets/pic/image.png)
-
-#### Invalid spot trade detail
-![alt text](/src/assets/pic/image-1.png)
-
-#### Invalid option trade detail
-![alt text](/src/assets/pic/image-2.png)
-
-#### valid option trade detail
-![alt text](/src/assets/pic/image-3.png)
+# Note: For the sample data for validation, see the [snapshots](/snapshots.md) file.
